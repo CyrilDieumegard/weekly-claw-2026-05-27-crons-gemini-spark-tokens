@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Claw - Crons, Gemini Spark & fin des tokens gratuits</title>
+  <style>
+    :root{
+      --bg:#04070a;
+      --bg2:#0d1317;
+      --panel:#10171d;
+      --panel2:#172029;
+      --text:#f8fbff;
+      --muted:#a9bac8;
+      --line:rgba(255,255,255,.13);
+      --claw:#ff5b45;
+      --blue:#49d6ff;
+      --green:#7cf7a4;
+      --amber:#ffd166;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 14% 10%, rgba(255,91,69,.28), transparent 28%),
+        radial-gradient(circle at 84% 12%, rgba(73,214,255,.22), transparent 27%),
+        radial-gradient(circle at 58% 86%, rgba(124,247,164,.12), transparent 30%),
+        linear-gradient(135deg,var(--bg),var(--bg2) 58%,#071c22);
+      overflow:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.13;
+      background-image:
+        linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px);
+      background-size:58px 58px;
+      mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 88%);
+    }
+    .app{height:100vh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding:22px 28px;gap:14px;position:relative}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand h1{margin:0;font-size:34px;letter-spacing:-.04em}
+    .brand p{margin:6px 0 0;color:var(--muted);font-size:15px}
+    .top-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .counter,.clock{color:var(--muted);font-weight:850;border:1px solid var(--line);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.045);backdrop-filter:blur(12px)}
+    .clock strong{color:#fff}.clock .ok{color:var(--green)}.clock .warn{color:var(--amber)}.clock .late{color:#ff6b7a}
+    .ticker{display:flex;gap:8px;align-items:center;justify-content:center;padding:10px 12px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045);overflow:hidden}
+    .ticker span{color:var(--blue);font-weight:950;white-space:nowrap}
+    .ticker a{color:#fff;text-decoration:none;font-weight:850;font-size:14px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line);white-space:nowrap}
+    .ticker a:hover{background:rgba(73,214,255,.18)}
+    .stage{position:relative;display:flex;align-items:flex-start;justify-content:center;min-height:0;padding:14px 0 8px}
+    .card{
+      width:min(1240px,100%);
+      min-height:min(640px,calc(100vh - 270px));
+      max-height:calc(100vh - 230px);
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(180deg,rgba(23,32,41,.96),rgba(8,12,16,.98));
+      box-shadow:0 30px 90px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);
+      padding:clamp(30px,3.2vw,52px);
+      display:none;
+      animation:slide .22s ease-out;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:after{content:"🦞";position:absolute;right:30px;bottom:-30px;color:rgba(255,255,255,.05);font-size:170px;line-height:.8;pointer-events:none;filter:grayscale(1)}
+    .card.active{display:block}
+    @keyframes slide{from{opacity:.2;transform:translateX(25px)}to{opacity:1;transform:translateX(0)}}
+    .time{display:inline-block;background:linear-gradient(90deg,var(--claw),var(--blue));color:#03070a;font-weight:950;border-radius:999px;padding:8px 13px;margin-bottom:18px}
+    h2{font-size:clamp(38px,3vw,54px);line-height:.98;margin:0 0 20px;letter-spacing:-.05em;max-width:1000px}
+    p,li{font-size:25px;line-height:1.38}
+    ul{margin:18px 0 0;padding-left:28px}
+    .lead{max-width:900px;color:#e1eef8}
+    .question{margin-top:26px;padding:22px 24px;border-radius:18px;background:rgba(73,214,255,.12);border-left:6px solid var(--blue);font-size:clamp(24px,1.8vw,30px);font-weight:950;line-height:1.22;max-width:1040px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+    .mini{padding:20px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid var(--line);min-height:142px}
+    .mini b{display:block;color:#fff;font-size:21px;margin-bottom:8px}
+    .mini span{color:var(--muted);font-size:18px;line-height:1.35;display:block}
+    .pill{display:inline-flex;align-items:center;gap:8px;color:#03070a;background:var(--green);font-weight:950;border-radius:999px;padding:7px 10px;margin:0 8px 8px 0;font-size:14px}
+    .hero-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+    button{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.08);color:#fff;border-radius:16px;padding:15px 22px;font-size:20px;font-weight:950}
+    button:hover{background:rgba(73,214,255,.16)}
+    .primary-cta{border:0;background:linear-gradient(90deg,var(--claw),var(--blue));color:#03070a;box-shadow:0 14px 34px rgba(73,214,255,.16)}
+    .controls{display:flex;align-items:center;justify-content:center;gap:16px;min-height:64px;position:relative;z-index:5}
+    .dots{display:flex;gap:7px}.dot{width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.25);cursor:pointer}.dot.active{background:var(--blue);width:30px}
+    .hint{position:fixed;right:22px;bottom:18px;color:rgba(255,255,255,.45);font-size:13px}
+    .matrix{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:18px;line-height:1.5;color:#d2f7ff;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:20px;max-width:900px}
+    .matrix strong{color:#fff}
+    .run{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px;max-width:1040px}
+    .run div{padding:20px 22px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);min-height:132px}
+    .run b{color:var(--blue);font-size:18px}.run span{display:block;margin-top:4px;color:var(--muted);font-size:17px;line-height:1.35}
+    .resources{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-height:min(430px,calc(100vh - 480px));overflow:auto;padding-right:8px;scrollbar-width:thin}
+    .resources .mini{min-height:0;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+    .resources .mini b{font-size:18px;margin-bottom:4px}.resources .mini span{font-size:15px;line-height:1.25}
+    .resources .links{grid-row:1 / span 2;grid-column:2}
+    .links a{display:inline-block;margin:0;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:#fff;text-decoration:none;font-weight:850;font-size:13px;white-space:nowrap}
+    .links a:hover{background:rgba(73,214,255,.18)}
+    @media(max-width:900px){body{overflow:auto}.app{height:auto}.card{min-height:auto;max-height:none;padding:28px}h2{font-size:36px}p,li{font-size:20px}.question{font-size:23px}.grid,.resources{grid-template-columns:1fr}.resources{max-height:none;overflow:visible}.resources .mini{display:block}.resources .links{grid-row:auto;grid-column:auto;margin-top:10px}.run{grid-template-columns:1fr}.controls{position:sticky;bottom:0;background:rgba(4,7,10,.86);padding:12px}.ticker{justify-content:flex-start;overflow:auto}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <h1>🦞 Weekly Claw Geneva</h1>
+        <p>Crons · Gemini Spark · Prix des modèles frontière · mercredi 27 mai · 20h · Discord</p>
+      </div>
+      <div class="top-right">
+        <div class="clock">Heure : <strong id="clockNow">--:--</strong></div>
+        <div class="clock">Timing : <strong id="timingStatus">avant meetup</strong></div>
+        <div class="counter"><span id="current">1</span> / <span id="total">8</span></div>
+      </div>
+    </header>
+
+    <div class="ticker" id="contextLinks"></div>
+
+    <main class="stage">
+      <section class="card active">
+        <span class="time">20:00 - 20:05</span>
+        <h2>Ce soir, on branche les agents au réel.</h2>
+        <p class="lead">Une session courte, concrète, avec trois sujets qui changent la manière d’utiliser OpenClaw : automatiser, tester le nouveau jouet de Google, et parler franchement du coût des modèles frontière.</p>
+        <div>
+          <span class="pill">Crons</span><span class="pill">Gemini Spark</span><span class="pill">Tokens</span><span class="pill">Agents locaux</span>
+        </div>
+        <div class="question">“Un agent utile, ce n’est pas un chatbot. C’est un système qui revient travailler quand il faut.”</div>
+        <div class="hero-actions"><button class="primary-cta" onclick="show(2)">Démarrer avec les Crons</button><button onclick="show(cards.length-1)">Ressources</button></div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:05 - 20:15</span>
+        <h2>Tour rapide de la room</h2>
+        <p class="lead">Même rituel : on garde ça utile et court pour savoir qui est là, ce que chacun construit, et quel workflow vaut la peine d’être montré.</p>
+        <div class="grid">
+          <div class="mini"><b>Qui tu es</b><span>Prénom, activité, projet actuel. Simple et direct.</span></div>
+          <div class="mini"><b>Ton usage IA</b><span>OpenClaw, ChatGPT, Claude, Gemini, local, automatisations, veille ou contenu.</span></div>
+          <div class="mini"><b>Ton vrai besoin</b><span>Ce que tu veux automatiser, comprendre ou rendre moins pénible.</span></div>
+        </div>
+        <div class="question">“Quel truc répétitif tu aimerais ne plus jamais faire à la main ?”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:15 - 20:35</span>
+        <h2>1. Les Crons sur OpenClaw</h2>
+        <p class="lead">Les crons transforment un agent local en assistant proactif : il peut se réveiller à heure fixe, vérifier une source, résumer, relancer, publier une alerte ou préparer un livrable.</p>
+        <div class="grid">
+          <div class="mini"><b>Exact timing</b><span>Rappels, routines, checks quotidiens, tâches hebdo, suivi de signaux.</span></div>
+          <div class="mini"><b>Agent isolé</b><span>Une tâche peut tourner sans polluer la session principale ni dépendre du contexte du chat.</span></div>
+          <div class="mini"><b>Delivery</b><span>Le résultat peut revenir dans Discord, dans une session dédiée ou rester silencieux.</span></div>
+        </div>
+        <div class="question">“La vraie bascule : passer de ‘demande-moi’ à ‘je surveille pour toi’.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:35 - 20:50</span>
+        <h2>Démo : une routine utile en 5 minutes</h2>
+        <p class="lead">Objectif : créer une automatisation lisible, pas une usine à gaz. Exemple idéal pour ce soir : un agent qui vérifie un sujet, résume ce qui compte, puis poste une alerte seulement si ça vaut le coup.</p>
+        <div class="matrix">
+          <strong>Trigger</strong> : tous les jours / toutes les heures / mercredi 20h<br>
+          <strong>Agent</strong> : cherche, lit, compare, décide<br>
+          <strong>Sortie</strong> : message Discord, synthèse, todo, follow-up ou silence
+        </div>
+        <div class="question">“Un bon cron doit économiser de l’attention, pas créer plus de bruit.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">20:50 - 21:05</span>
+        <h2>2. Gemini Spark</h2>
+        <p class="lead">Le nouveau jouet de Google mérite un décorticage calme : ce qu’il fait mieux, ce qui est surtout du branding, et où il peut vraiment rentrer dans un workflow OpenClaw.</p>
+        <div class="grid">
+          <div class="mini"><b>À tester</b><span>Vitesse, raisonnement, génération, multimodal, qualité des réponses courtes.</span></div>
+          <div class="mini"><b>À challenger</b><span>Promesses marketing, limites réelles, coût, intégration dans les workflows.</span></div>
+          <div class="mini"><b>À comparer</b><span>Claude, OpenAI, Grok, modèles locaux et routage via OpenRouter.</span></div>
+        </div>
+        <div class="question">“Est-ce un vrai outil de production, ou juste un très beau bouton à tester ?”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">21:05 - 21:25</span>
+        <h2>3. La fin des tokens gratuits</h2>
+        <p class="lead">Les modèles frontière vont coûter leur vrai prix. Les agents consomment plus que les chats classiques, et beaucoup de workflows ‘magiques’ deviennent vite chers quand ils tournent en continu.</p>
+        <div class="run">
+          <div><b>Le piège</b><span>Un agent autonome peut lire, appeler des tools, réessayer, résumer, puis recommencer. Le compteur tourne.</span></div>
+          <div><b>La vérité</b><span>Le bon modèle n’est pas toujours le meilleur modèle. C’est le moins cher qui fait correctement le job.</span></div>
+          <div><b>Le local</b><span>LM Studio, Gemma, Qwen et autres modèles locaux deviennent une stratégie économique, pas juste idéologique.</span></div>
+          <div><b>Le routage</b><span>Frontière pour les décisions critiques, local ou petit modèle pour les routines répétitives.</span></div>
+        </div>
+        <div class="question">“Personne n’est prêt, parce que tout le monde a testé l’IA avec le prix subventionné.”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">21:25 - 21:40</span>
+        <h2>Débat ouvert</h2>
+        <div class="question">“Quels workflows méritent vraiment un modèle frontière ?”</div>
+        <div class="question">“Qu’est-ce qu’on doit faire tourner en local par défaut ?”</div>
+        <div class="question">“Quelle routine cron vous ferait gagner du temps dès demain matin ?”</div>
+      </section>
+
+      <section class="card">
+        <span class="time">Ressources</span>
+        <h2>Liens pour la session</h2>
+        <p class="lead">À garder sous la main pendant le live pour tester vite et discuter sur du concret.</p>
+        <div class="grid resources">
+          <div class="mini"><b>OpenClaw</b><span>Agent local et cockpit de la session.</span><div class="links"><a href="https://openclaw.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Docs OpenClaw</b><span>Installation, agents, tools, channels et automatisations.</span><div class="links"><a href="https://docs.openclaw.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Google AI Studio</b><span>Tester Gemini côté Google.</span><div class="links"><a href="https://aistudio.google.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Gemini</b><span>Page produit Gemini.</span><div class="links"><a href="https://gemini.google.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>OpenRouter</b><span>Comparer modèles, prix et routage multi-provider.</span><div class="links"><a href="https://openrouter.ai/models" target="_blank">Models</a></div></div>
+          <div class="mini"><b>OpenRouter Rankings</b><span>Voir les modèles qui montent.</span><div class="links"><a href="https://openrouter.ai/rankings" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>LM Studio</b><span>Faire tourner des modèles locaux sur Mac.</span><div class="links"><a href="https://lmstudio.ai/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Hugging Face Models</b><span>Catalogue modèles open source.</span><div class="links"><a href="https://huggingface.co/models" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>OpenClaw Geneva</b><span>Communauté et Weekly Claw.</span><div class="links"><a href="https://discord.com/" target="_blank">Discord</a></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="controls">
+      <button onclick="prevCard()">← Précédent</button>
+      <div class="dots" id="dots"></div>
+      <button onclick="nextCard()">Suivant →</button>
+    </footer>
+  </div>
+  <div class="hint">Flèches clavier ← → aussi disponibles</div>
+  <script>
+    const cards=[...document.querySelectorAll('.card')];
+    const dots=document.getElementById('dots');
+    const current=document.getElementById('current');
+    const contextLinks=document.getElementById('contextLinks');
+    const linksByCard=[
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Discord',url:'https://discord.com/'},{label:'OpenRouter Models',url:'https://openrouter.ai/models'}],
+      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
+      [{label:'OpenClaw Docs',url:'https://docs.openclaw.ai/'},{label:'OpenClaw',url:'https://openclaw.ai/'}],
+      [{label:'Docs OpenClaw',url:'https://docs.openclaw.ai/'},{label:'OpenRouter',url:'https://openrouter.ai/'}],
+      [{label:'Google AI Studio',url:'https://aistudio.google.com/'},{label:'Gemini',url:'https://gemini.google.com/'},{label:'OpenRouter Rankings',url:'https://openrouter.ai/rankings'}],
+      [{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'},{label:'Hugging Face Models',url:'https://huggingface.co/models'}],
+      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Google AI Studio',url:'https://aistudio.google.com/'},{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'}]
+    ];
+    const schedule=[
+      {start:'20:00',end:'20:05'},
+      {start:'20:05',end:'20:15'},
+      {start:'20:15',end:'20:35'},
+      {start:'20:35',end:'20:50'},
+      {start:'20:50',end:'21:05'},
+      {start:'21:05',end:'21:25'},
+      {start:'21:25',end:'21:40'},
+      {start:null,end:null}
+    ];
+    document.getElementById('total').textContent=cards.length;
+    let index=0;
+    cards.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>show(i);dots.appendChild(d)});
+    const dotEls=[...document.querySelectorAll('.dot')];
+    function minutes(t){const [h,m]=t.split(':').map(Number);return h*60+m;}
+    function updateClock(){
+      const now=new Date();
+      const nowMin=now.getHours()*60+now.getMinutes();
+      document.getElementById('clockNow').textContent=now.toLocaleTimeString('fr-CH',{hour:'2-digit',minute:'2-digit'});
+      const st=document.getElementById('timingStatus');
+      const slot=schedule[index];
+      if(!slot || !slot.start){st.textContent='hors timing';st.className='warn';return;}
+      const start=minutes(slot.start), end=slot.end?minutes(slot.end):null;
+      if(nowMin<start){st.textContent='dans '+(start-nowMin)+' min';st.className='ok';}
+      else if(end && nowMin<=end){st.textContent='reste '+(end-nowMin)+' min';st.className=(end-nowMin<=2?'warn':'ok');}
+      else if(end){st.textContent='retard '+(nowMin-end)+' min';st.className='late';}
+      else {st.textContent='after';st.className='ok';}
+    }
+    setInterval(updateClock,1000);
+    function renderLinks(){
+      const links=linksByCard[index]||[];
+      contextLinks.innerHTML='<span>Liens utiles :</span>';
+      if(!links.length){contextLinks.innerHTML+='<span>Focus discussion.</span>';return;}
+      links.forEach(l=>{const a=document.createElement('a');a.href=l.url;a.target='_blank';a.textContent=l.label;contextLinks.appendChild(a);});
+    }
+    function show(i){
+      index=(i+cards.length)%cards.length;
+      cards.forEach((c,n)=>c.classList.toggle('active',n===index));
+      dotEls.forEach((d,n)=>d.classList.toggle('active',n===index));
+      current.textContent=index+1;
+      renderLinks();
+      updateClock();
+    }
+    function nextCard(){show(index+1)}
+    function prevCard(){show(index-1)}
+    window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextCard(); if(e.key==='ArrowLeft')prevCard();});
+    renderLinks();
+    updateClock();
+    const initialSlide = Number(new URLSearchParams(location.search).get('slide'));
+    if(Number.isInteger(initialSlide) && initialSlide >= 1 && initialSlide <= cards.length) show(initialSlide - 1);
+  </script>
+</body>
+</html>
