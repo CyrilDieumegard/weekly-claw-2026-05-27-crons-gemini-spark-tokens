@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weekly Claw - Crons, Gemini Spark & fin des tokens gratuits</title>
+  <title>Résumé Weekly Claw - Crons, agents locaux et tokens</title>
   <style>
     :root{
       --bg:#04070a;
@@ -109,7 +109,7 @@
     <header>
       <div class="brand">
         <h1>🦞 Weekly Claw Geneva</h1>
-        <p>Crons · Gemini Spark · Prix des modèles frontière · mercredi 27 mai · 20h · Discord</p>
+        <p>Résumé du meetup · Crons OpenClaw · agents locaux · LM Studio · coûts de tokens · 27 mai</p>
       </div>
       <div class="top-right">
         <div class="clock">Heure : <strong id="clockNow">--:--</strong></div>
@@ -122,99 +122,119 @@
 
     <main class="stage">
       <section class="card active">
-        <span class="time">20:00 - 20:05</span>
-        <h2>Ce soir, on branche les agents au réel.</h2>
-        <p class="lead">Une session courte, concrète, avec trois sujets qui changent la manière d’utiliser OpenClaw : automatiser, tester le nouveau jouet de Google, et parler franchement du coût des modèles frontière.</p>
+        <span class="time">Résumé</span>
+        <h2>OpenClaw devient utile quand il travaille sans attendre le chat.</h2>
+        <p class="lead">Cette édition a surtout montré comment passer d’un assistant qui répond à un agent qui exécute des routines: crons, agents dédiés, modèles locaux, scraping, livraisons Telegram ou Discord.</p>
         <div>
-          <span class="pill">Crons</span><span class="pill">Gemini Spark</span><span class="pill">Tokens</span><span class="pill">Agents locaux</span>
+          <span class="pill">Crons</span><span class="pill">Agents</span><span class="pill">LM Studio</span><span class="pill">Apify</span><span class="pill">Tokens</span>
         </div>
-        <div class="question">“Un agent utile, ce n’est pas un chatbot. C’est un système qui revient travailler quand il faut.”</div>
-        <div class="hero-actions"><button class="primary-cta" onclick="show(2)">Démarrer avec les Crons</button><button onclick="show(cards.length-1)">Ressources</button></div>
+        <div class="question">Idée clé: automatiser les tâches répétitives, mais garder le contrôle sur le modèle utilisé et le canal de sortie.</div>
+        <div class="hero-actions"><button class="primary-cta" onclick="show(1)">Voir les points clés</button><button onclick="show(cards.length-1)">Ressources</button></div>
       </section>
 
       <section class="card">
-        <span class="time">20:05 - 20:15</span>
-        <h2>Tour rapide de la room</h2>
-        <p class="lead">Même rituel : on garde ça utile et court pour savoir qui est là, ce que chacun construit, et quel workflow vaut la peine d’être montré.</p>
+        <span class="time">Point clé 1</span>
+        <h2>Les cron jobs: programmer du travail récurrent</h2>
+        <p class="lead">Un cron job OpenClaw permet de lancer une tâche à heure fixe: tous les matins, chaque semaine, une seule fois, ou selon un rythme précis.</p>
         <div class="grid">
-          <div class="mini"><b>Qui tu es</b><span>Prénom, activité, projet actuel. Simple et direct.</span></div>
-          <div class="mini"><b>Ton usage IA</b><span>OpenClaw, ChatGPT, Claude, Gemini, local, automatisations, veille ou contenu.</span></div>
-          <div class="mini"><b>Ton vrai besoin</b><span>Ce que tu veux automatiser, comprendre ou rendre moins pénible.</span></div>
+          <div class="mini"><b>Quoi</b><span>Décrire la tâche: météo, veille, résumé, audit, scraping, backup ou cockpit projet.</span></div>
+          <div class="mini"><b>Quand</b><span>Choisir la fréquence: matin, soir, heure précise, hebdomadaire ou date unique.</span></div>
+          <div class="mini"><b>Où</b><span>Envoyer le résultat dans le dashboard, Telegram, Discord ou une session dédiée.</span></div>
         </div>
-        <div class="question">“Quel truc répétitif tu aimerais ne plus jamais faire à la main ?”</div>
+        <div class="question">Un bon cron économise de l’attention. S’il ajoute du bruit, il faut le supprimer ou le resserrer.</div>
       </section>
 
       <section class="card">
-        <span class="time">20:15 - 20:35</span>
-        <h2>1. Les Crons sur OpenClaw</h2>
-        <p class="lead">Les crons transforment un agent local en assistant proactif : il peut se réveiller à heure fixe, vérifier une source, résumer, relancer, publier une alerte ou préparer un livrable.</p>
-        <div class="grid">
-          <div class="mini"><b>Exact timing</b><span>Rappels, routines, checks quotidiens, tâches hebdo, suivi de signaux.</span></div>
-          <div class="mini"><b>Agent isolé</b><span>Une tâche peut tourner sans polluer la session principale ni dépendre du contexte du chat.</span></div>
-          <div class="mini"><b>Delivery</b><span>Le résultat peut revenir dans Discord, dans une session dédiée ou rester silencieux.</span></div>
-        </div>
-        <div class="question">“La vraie bascule : passer de ‘demande-moi’ à ‘je surveille pour toi’.”</div>
+        <span class="time">Point clé 2</span>
+        <h2>Cas d’usage concrets sortis pendant la session</h2>
+        <ul>
+          <li>Brief quotidien: météo, marchés, actualité, devises.</li>
+          <li>Résumé email du soir, directement envoyé sur Telegram.</li>
+          <li>Cockpit projets: ce qui est en cours, bloqué, à faire.</li>
+          <li>Backup quotidien des données importantes.</li>
+          <li>Leçons récurrentes: piano, italien, Python.</li>
+          <li>Transformation automatique de vidéos longues en shorts.</li>
+        </ul>
+        <div class="question">Le déclic: OpenClaw peut devenir un opérateur de routines, pas juste une fenêtre de discussion.</div>
       </section>
 
       <section class="card">
-        <span class="time">20:35 - 20:50</span>
-        <h2>Démo : une routine utile en 5 minutes</h2>
-        <p class="lead">Objectif : créer une automatisation lisible, pas une usine à gaz. Exemple idéal pour ce soir : un agent qui vérifie un sujet, résume ce qui compte, puis poste une alerte seulement si ça vaut le coup.</p>
-        <div class="matrix">
-          <strong>Trigger</strong> : tous les jours / toutes les heures / mercredi 20h<br>
-          <strong>Agent</strong> : cherche, lit, compare, décide<br>
-          <strong>Sortie</strong> : message Discord, synthèse, todo, follow-up ou silence
-        </div>
-        <div class="question">“Un bon cron doit économiser de l’attention, pas créer plus de bruit.”</div>
-      </section>
-
-      <section class="card">
-        <span class="time">20:50 - 21:05</span>
-        <h2>2. Gemini Spark</h2>
-        <p class="lead">Le nouveau jouet de Google mérite un décorticage calme : ce qu’il fait mieux, ce qui est surtout du branding, et où il peut vraiment rentrer dans un workflow OpenClaw.</p>
-        <div class="grid">
-          <div class="mini"><b>À tester</b><span>Vitesse, raisonnement, génération, multimodal, qualité des réponses courtes.</span></div>
-          <div class="mini"><b>À challenger</b><span>Promesses marketing, limites réelles, coût, intégration dans les workflows.</span></div>
-          <div class="mini"><b>À comparer</b><span>Claude, OpenAI, Grok, modèles locaux et routage via OpenRouter.</span></div>
-        </div>
-        <div class="question">“Est-ce un vrai outil de production, ou juste un très beau bouton à tester ?”</div>
-      </section>
-
-      <section class="card">
-        <span class="time">21:05 - 21:25</span>
-        <h2>3. La fin des tokens gratuits</h2>
-        <p class="lead">Les modèles frontière vont coûter leur vrai prix. Les agents consomment plus que les chats classiques, et beaucoup de workflows ‘magiques’ deviennent vite chers quand ils tournent en continu.</p>
+        <span class="time">Point clé 3</span>
+        <h2>Scraping et veille: très puissant, mais à cadrer</h2>
+        <p class="lead">Gilles a montré un exemple simple: scraper immobilier.ch pour les locations de 3 pièces à Genève, puis construire un fichier avec localité, pièces, prix, balcon et lien d’annonce.</p>
         <div class="run">
-          <div><b>Le piège</b><span>Un agent autonome peut lire, appeler des tools, réessayer, résumer, puis recommencer. Le compteur tourne.</span></div>
-          <div><b>La vérité</b><span>Le bon modèle n’est pas toujours le meilleur modèle. C’est le moins cher qui fait correctement le job.</span></div>
-          <div><b>Le local</b><span>LM Studio, Gemma, Qwen et autres modèles locaux deviennent une stratégie économique, pas juste idéologique.</span></div>
-          <div><b>Le routage</b><span>Frontière pour les décisions critiques, local ou petit modèle pour les routines répétitives.</span></div>
+          <div><b>Ce qui marche</b><span>Un prompt simple peut suffire pour extraire des données structurées si le site laisse passer.</span></div>
+          <div><b>Ce qui bloque</b><span>Beaucoup de sites protègent leurs données ou interdisent le scraping.</span></div>
+          <div><b>Option avancée</b><span>Apify peut gérer des scrapers spécialisés, par exemple LinkedIn ou veille concurrentielle.</span></div>
+          <div><b>Bon usage</b><span>Remonter uniquement les annonces, profils ou signaux qui valent une action.</span></div>
         </div>
-        <div class="question">“Personne n’est prêt, parce que tout le monde a testé l’IA avec le prix subventionné.”</div>
       </section>
 
       <section class="card">
-        <span class="time">21:25 - 21:40</span>
-        <h2>Débat ouvert</h2>
-        <div class="question">“Quels workflows méritent vraiment un modèle frontière ?”</div>
-        <div class="question">“Qu’est-ce qu’on doit faire tourner en local par défaut ?”</div>
-        <div class="question">“Quelle routine cron vous ferait gagner du temps dès demain matin ?”</div>
+        <span class="time">Point clé 4</span>
+        <h2>Agents: pas besoin d’en créer 50</h2>
+        <p class="lead">La discussion a été claire: multiplier les agents pour le spectacle crée souvent plus de confusion que de valeur.</p>
+        <div class="grid">
+          <div class="mini"><b>Agent principal</b><span>Pour les tâches importantes, le code, les décisions complexes et les échanges quotidiens.</span></div>
+          <div class="mini"><b>Agent local</b><span>Pour les routines simples qui peuvent tourner via LM Studio sans coût de tokens cloud.</span></div>
+          <div class="mini"><b>Agent spécialisé</b><span>Pour un rôle net: scraping, veille, reporting, contenu ou support.</span></div>
+        </div>
+        <div class="question">Créer un agent seulement s’il simplifie le routage, les outils, le modèle ou les coûts.</div>
+      </section>
+
+      <section class="card">
+        <span class="time">Point clé 5</span>
+        <h2>Le local sert surtout à maîtriser les coûts</h2>
+        <p class="lead">Un cron qui tourne tous les jours avec un gros modèle cloud peut vite coûter cher. Pour les tâches simples, un modèle local suffit souvent.</p>
+        <div class="matrix">
+          <strong>Cloud</strong> : décisions difficiles, code complexe, qualité maximale<br>
+          <strong>Local</strong> : routines, brouillons, idées, résumés simples, veille récurrente<br>
+          <strong>Routage</strong> : le bon modèle pour la bonne tâche, pas le modèle le plus cher par défaut
+        </div>
+        <div class="question">Le bon modèle n’est pas toujours le plus fort. C’est celui qui fait le job au meilleur coût.</div>
+      </section>
+
+      <section class="card">
+        <span class="time">Point clé 6</span>
+        <h2>LM Studio: attention au préchargement</h2>
+        <p class="lead">Quand un modèle local est appelé pour la première fois, il peut être lent parce qu’il doit être chargé en mémoire. Une fois préchargé, les réponses deviennent plus fluides.</p>
+        <div class="run">
+          <div><b>Qwen 3.6 27B</b><span>Intéressant sur grosse machine, notamment avec 128 Go de RAM.</span></div>
+          <div><b>Quantisation</b><span>Q8 est lourd. Q4_K_M est souvent un meilleur compromis vitesse et qualité.</span></div>
+          <div><b>Serveur local</b><span>LM Studio doit rester lancé si un cron dépend d’un agent local.</span></div>
+          <div><b>Test réel</b><span>Comparer sur une vraie tâche, pas juste dans un chat vide.</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <span class="time">Questions</span>
+        <h2>Les réponses utiles du meetup</h2>
+        <div class="run">
+          <div><b>ChatGPT fait aussi des tâches?</b><span>Oui pour du simple. OpenClaw devient plus fort quand il touche GitHub, fichiers locaux, Telegram, Discord, Apify ou LM Studio.</span></div>
+          <div><b>Créer un cron par chat?</b><span>Oui, mais il faut vérifier ensuite timing, agent, modèle et livraison.</span></div>
+          <div><b>Un cron peut utiliser le local?</b><span>Oui, s’il est rattaché à un agent configuré sur LM Studio.</span></div>
+          <div><b>Pourquoi LocalClaw?</b><span>Pour rendre ces réglages plus lisibles que le dashboard brut d’OpenClaw.</span></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <span class="time">À retenir</span>
+        <h2>La bonne architecture</h2>
+        <p class="lead">Un agent principal pour le travail exigeant. Un agent local pour les routines. Des cron jobs pour les tâches répétitives. Des canaux propres pour recevoir seulement ce qui compte.</p>
+        <div class="question">Le futur proche: moins de prompts manuels, plus de routines intelligentes, mais avec une vraie discipline sur les coûts de tokens.</div>
       </section>
 
       <section class="card">
         <span class="time">Ressources</span>
-        <h2>Liens pour la session</h2>
-        <p class="lead">À garder sous la main pendant le live pour tester vite et discuter sur du concret.</p>
+        <h2>Liens pour continuer</h2>
+        <p class="lead">Les ressources utiles pour reproduire les workflows discutés pendant le meetup.</p>
         <div class="grid resources">
-          <div class="mini"><b>OpenClaw</b><span>Agent local et cockpit de la session.</span><div class="links"><a href="https://openclaw.ai/" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>Docs OpenClaw</b><span>Installation, agents, tools, channels et automatisations.</span><div class="links"><a href="https://docs.openclaw.ai/" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>Google AI Studio</b><span>Tester Gemini côté Google.</span><div class="links"><a href="https://aistudio.google.com/" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>Gemini</b><span>Page produit Gemini.</span><div class="links"><a href="https://gemini.google.com/" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>OpenRouter</b><span>Comparer modèles, prix et routage multi-provider.</span><div class="links"><a href="https://openrouter.ai/models" target="_blank">Models</a></div></div>
-          <div class="mini"><b>OpenRouter Rankings</b><span>Voir les modèles qui montent.</span><div class="links"><a href="https://openrouter.ai/rankings" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>OpenClaw</b><span>Agent local, crons, sessions et channels.</span><div class="links"><a href="https://openclaw.ai/" target="_blank">Ouvrir</a></div></div>
           <div class="mini"><b>LM Studio</b><span>Faire tourner des modèles locaux sur Mac.</span><div class="links"><a href="https://lmstudio.ai/" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>Hugging Face Models</b><span>Catalogue modèles open source.</span><div class="links"><a href="https://huggingface.co/models" target="_blank">Ouvrir</a></div></div>
-          <div class="mini"><b>OpenClaw Geneva</b><span>Communauté et Weekly Claw.</span><div class="links"><a href="https://discord.com/" target="_blank">Discord</a></div></div>
+          <div class="mini"><b>OpenRouter Models</b><span>Comparer les modèles cloud et leurs coûts.</span><div class="links"><a href="https://openrouter.ai/models" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Apify</b><span>Scraping, LinkedIn, veille et automatisations data.</span><div class="links"><a href="https://apify.com/" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Hugging Face</b><span>Trouver des modèles locaux et variantes quantisées.</span><div class="links"><a href="https://huggingface.co/models" target="_blank">Ouvrir</a></div></div>
+          <div class="mini"><b>Google AI Studio</b><span>Tester Gemini côté Google.</span><div class="links"><a href="https://aistudio.google.com/" target="_blank">Ouvrir</a></div></div>
         </div>
       </section>
     </main>
@@ -232,23 +252,27 @@
     const current=document.getElementById('current');
     const contextLinks=document.getElementById('contextLinks');
     const linksByCard=[
-      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Discord',url:'https://discord.com/'},{label:'OpenRouter Models',url:'https://openrouter.ai/models'}],
-      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
-      [{label:'OpenClaw Docs',url:'https://docs.openclaw.ai/'},{label:'OpenClaw',url:'https://openclaw.ai/'}],
-      [{label:'Docs OpenClaw',url:'https://docs.openclaw.ai/'},{label:'OpenRouter',url:'https://openrouter.ai/'}],
-      [{label:'Google AI Studio',url:'https://aistudio.google.com/'},{label:'Gemini',url:'https://gemini.google.com/'},{label:'OpenRouter Rankings',url:'https://openrouter.ai/rankings'}],
-      [{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'},{label:'Hugging Face Models',url:'https://huggingface.co/models'}],
-      [{label:'OpenClaw Geneva Discord',url:'https://discord.com/'}],
-      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Google AI Studio',url:'https://aistudio.google.com/'},{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'}]
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'LM Studio',url:'https://lmstudio.ai/'},{label:'OpenRouter Models',url:'https://openrouter.ai/models'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'LM Studio',url:'https://lmstudio.ai/'}],
+      [{label:'Apify',url:'https://apify.com/'},{label:'OpenClaw',url:'https://openclaw.ai/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'LM Studio',url:'https://lmstudio.ai/'}],
+      [{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'}],
+      [{label:'LM Studio',url:'https://lmstudio.ai/'},{label:'Hugging Face Models',url:'https://huggingface.co/models'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'Apify',url:'https://apify.com/'}],
+      [{label:'OpenRouter Models',url:'https://openrouter.ai/models'},{label:'LM Studio',url:'https://lmstudio.ai/'}],
+      [{label:'OpenClaw',url:'https://openclaw.ai/'},{label:'LM Studio',url:'https://lmstudio.ai/'},{label:'Apify',url:'https://apify.com/'},{label:'Google AI Studio',url:'https://aistudio.google.com/'}]
     ];
     const schedule=[
-      {start:'20:00',end:'20:05'},
-      {start:'20:05',end:'20:15'},
-      {start:'20:15',end:'20:35'},
-      {start:'20:35',end:'20:50'},
-      {start:'20:50',end:'21:05'},
-      {start:'21:05',end:'21:25'},
-      {start:'21:25',end:'21:40'},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
+      {start:null,end:null},
       {start:null,end:null}
     ];
     document.getElementById('total').textContent=cards.length;
